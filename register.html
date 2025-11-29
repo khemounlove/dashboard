@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - School Management Admin Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1e40af',
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-in-out',
+                        'slide-up': 'slideUp 0.3s ease-out',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(10px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 antialiased min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 transition-colors duration-300">
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="fixed inset-0 bg-white dark:bg-gray-900 z-50 flex items-center justify-center transition-opacity duration-300">
+        <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+    </div>
+    <div class="max-w-md w-full space-y-8 animate-fade-in">
+        <!-- Logo -->
+        <div class="flex items-center justify-center mb-8 p-4 bg-gradient-to-r from-primary to-blue-600 rounded-lg shadow-md">
+            <i class="fas fa-graduation-cap text-3xl text-white mr-3"></i>
+            <h1 class="text-2xl font-bold text-white">School Admin</h1>
+        </div>
+        <div class="bg-white dark:bg-gray-800 shadow-lg rounded-xl p-8">
+            <div class="max-w-md w-full space-y-8">
+                <div>
+                    <h2 class="mt-6 text-3xl font-bold text-center text-gray-900 dark:text-white">Create your account</h2>
+                    <p class="mt-2 text-center text-sm text-gray-600 dark:text-gray-400">Join the school management system</p>
+                </div>
+                <form id="registerForm" class="mt-8 space-y-6">
+                    <div>
+                        <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Full Name</label>
+                        <div class="mt-1 relative">
+                            <i class="fas fa-user absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5"></i>
+                            <input id="name" name="name" type="text" required autocomplete="name" placeholder="Enter your full name" class="w-full pl-10 pr-3 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-all">
+                        </div>
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Email Address</label>
+                        <div class="mt-1 relative">
+                            <i class="fas fa-envelope absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5"></i>
+                            <input id="email" name="email" type="email" required autocomplete="email" placeholder="Enter your email" class="w-full pl-10 pr-3 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-all">
+                        </div>
+                    </div>
+                    <div>
+                        <label for="phone" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Phone Number</label>
+                        <div class="mt-1 relative">
+                            <i class="fas fa-phone absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5"></i>
+                            <input id="phone" name="phone" type="tel" required autocomplete="tel" placeholder="Enter your phone" class="w-full pl-10 pr-3 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-all">
+                        </div>
+                    </div>
+                    <div>
+                        <label for="role" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Role</label>
+                        <div class="mt-1 relative">
+                            <i class="fas fa-user-tag absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5"></i>
+                            <select id="role" name="role" required class="w-full pl-10 pr-3 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-all">
+                                <option value="">Select Role</option>
+                                <option value="Admin">Admin</option>
+                                <option value="Teacher">Teacher</option>
+                                <option value="Student">Student</option>
+                                <option value="Parent">Parent</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="password" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Password</label>
+                        <div class="mt-1 relative">
+                            <i class="fas fa-lock absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5"></i>
+                            <input id="password" name="password" type="password" required autocomplete="new-password" placeholder="Create a password" class="w-full pl-10 pr-3 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-all">
+                            <button type="button" onclick="togglePassword()" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors">
+                                <i id="passwordToggle" class="fas fa-eye w-5 h-5"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="confirmPassword" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Confirm Password</label>
+                        <div class="mt-1 relative">
+                            <i class="fas fa-lock absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5"></i>
+                            <input id="confirmPassword" name="confirmPassword" type="password" required autocomplete="new-password" placeholder="Confirm your password" class="w-full pl-10 pr-3 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-all">
+                            <button type="button" onclick="toggleConfirmPassword()" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors">
+                                <i id="confirmPasswordToggle" class="fas fa-eye w-5 h-5"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div>
+                        <button type="submit" class="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-primary hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-all duration-200 transform hover:scale-105 shadow-md">
+                            <span class="absolute left-0 inset-y-0 flex items-center pl-3">
+                                <i class="fas fa-user-plus group-hover:translate-x-1 transition-transform duration-200"></i>
+                            </span>
+                            Register
+                        </button>
+                    </div>
+                </form>
+                <div class="mt-6 text-center">
+                    <p class="text-sm text-gray-600 dark:text-gray-400">Already have an account? <a href="login.html" class="font-medium text-primary hover:text-blue-500 transition-colors">Sign in</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Theme Toggle (optional for register)
+        function toggleTheme() {
+            const html = document.documentElement;
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                html.classList.add('light');
+                localStorage.setItem('theme', 'light');
+            } else {
+                html.classList.remove('light');
+                html.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        if (savedTheme === 'dark') {
+            document.documentElement.classList.remove('light');
+            document.documentElement.classList.add('dark');
+        }
+        // Password visibility toggle
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const toggleIcon = document.getElementById('passwordToggle');
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleIcon.className = 'fas fa-eye-slash';
+            } else {
+                passwordInput.type = 'password';
+                toggleIcon.className = 'fas fa-eye';
+            }
+        }
+        function toggleConfirmPassword() {
+            const confirmPasswordInput = document.getElementById('confirmPassword');
+            const toggleIcon = document.getElementById('confirmPasswordToggle');
+            if (confirmPasswordInput.type === 'password') {
+                confirmPasswordInput.type = 'text';
+                toggleIcon.className = 'fas fa-eye-slash';
+            } else {
+                confirmPasswordInput.type = 'password';
+                toggleIcon.className = 'fas fa-eye';
+            }
+        }
+        // Loading Overlay
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const loading = document.getElementById('loading-overlay');
+                loading.style.opacity = '0';
+                setTimeout(() => loading.remove(), 300);
+            }, 1000);
+        });
+        // Register Form Submission
+        document.getElementById('registerForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const role = document.getElementById('role').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            if (password !== confirmPassword) {
+                alert('Passwords do not match!');
+                return;
+            }
+            // Load existing users
+            let users = JSON.parse(localStorage.getItem('users')) || [];
+            // Check if email exists
+            if (users.find(u => u.email === email)) {
+                alert('Email already registered!');
+                return;
+            }
+            // Add new user (status: Pending for approval)
+            const id = Date.now();
+            const joined = new Date().toISOString().split('T')[0];
+            users.push({ id, name, email, phone, role, password, status: 'Pending', joined });
+            localStorage.setItem('users', JSON.stringify(users));
+            alert('Registration successful! Please wait for admin approval or use demo login.');
+            window.location.href = 'login.html';
+        });
+    </script>
+</body>
+</html>
